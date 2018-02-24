@@ -1,3 +1,4 @@
+![alt text](https://github.com/antixcode6/Passworder-V2/blob/master/tryme.gif?raw=true)
 <h2>Passworder-V2</h2>
 A while ago I wrote a script utility to generate passwords. That script was cumbersom, slow, overcomplicated, and had no instructions on how to use it. </br>
 Now I've decided to re-visit the password generation topic for a work project and I have written a V2 of my old script.
