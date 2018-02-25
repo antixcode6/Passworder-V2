@@ -8,27 +8,35 @@ dictionary = {'A':'Alpha', 'B':'Bravo','C':'Charlie', 'D':'Delta', 'E':'Echo', '
 @click.command()
 @click.option('--num', is_flag=True, help='Use this to include 0-9 characters')
 @click.option('--special',is_flag=True, help="Use this to allow special characters ex: {} [] - ? /\ +")
+@click.option('--phonetic', is_flag=True, help="Use this to turn on or off phonetic translation - default off")
 @click.option('--length', default=10, help='Use to change password length. Default and minimum is 10')
 
-def generate(length, num, special):
+def generate(length, num, special,phonetic):
     if(length < 10):
         click.echo("Minimum length is 10")
         length = 10
+    if(phonetic):
+            if(num):
+                vanilla_num_temp = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=length))
+                click.echo(vanilla_num_temp)
+                click.echo("Remember your password easier: " + " ".join(map(dictionary.get,vanilla_num_temp)))
+                exit()
+            else:
+                vanilla_temp = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase, k=length))
+                click.echo(vanilla_temp)
+                click.echo("Remember your password easier: " + " ".join(map(dictionary.get,vanilla_temp)))
+                exit()
     if(num):
         if(special):
             click.echo(''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.punctuation + string.digits, k=length)))
             exit()
-        vanilla_num_temp = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=length))
-        click.echo(vanilla_num_temp)
-        click.echo(" ".join(map(dictionary.get,vanilla_num_temp)))
+        click.echo(''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=length)))
         exit()
     elif(special):
             click.echo(''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.punctuation, k=length)))
             exit()
 
-    vanilla_temp = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase, k=length))
-    click.echo(vanilla_temp)
-    click.echo(" ".join(map(dictionary.get,vanilla_temp)))
+    click.echo(''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase, k=length)))
 
 if __name__ == '__main__':
     generate()
